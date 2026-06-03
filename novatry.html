@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Novatry — Grow Businesses. Drive Impact.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #0d2240;
+    --navy-mid: #163459;
+    --teal: #1abfa8;
+    --teal-dark: #0f9e8a;
+    --teal-light: #5dd6c6;
+    --white: #ffffff;
+    --off-white: #f4f8fb;
+    --text-muted: #8099b4;
+    --border: rgba(26,191,168,0.18);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 6%;
+    background: rgba(13,34,64,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    animation: slideDown 0.6s ease;
+  }
+  @keyframes slideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo svg { width: 44px; height: 44px; }
+  .nav-logo-text { font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 1.4rem; color: var(--white); letter-spacing: -0.5px; }
+  .nav-logo-text span { color: var(--teal); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--teal); }
+  .nav-cta {
+    background: var(--teal); color: var(--navy); font-weight: 600;
+    padding: 10px 24px; border-radius: 6px; text-decoration: none;
+    font-size: 0.9rem; transition: background 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover { background: var(--teal-light); transform: translateY(-1px); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 6% 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 80% 40%, rgba(26,191,168,0.12) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 50% at 10% 80%, rgba(26,191,168,0.07) 0%, transparent 60%),
+      linear-gradient(160deg, #0d2240 60%, #0f3352 100%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(26,191,168,0.04) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(26,191,168,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 640px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(26,191,168,0.12); border: 1px solid var(--border);
+    border-radius: 100px; padding: 6px 16px; margin-bottom: 28px;
+    font-size: 0.8rem; color: var(--teal); font-weight: 500; letter-spacing: 0.5px;
+    animation: fadeUp 0.7s ease 0.2s both;
+  }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--teal); border-radius: 50%; display: block; }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5.5vw, 5rem);
+    font-weight: 900; line-height: 1.05;
+    margin-bottom: 24px;
+    animation: fadeUp 0.7s ease 0.35s both;
+  }
+  .hero-title em { font-style: normal; color: var(--teal); }
+  .hero-sub {
+    color: var(--text-muted); font-size: 1.1rem; line-height: 1.7;
+    max-width: 520px; margin-bottom: 40px;
+    animation: fadeUp 0.7s ease 0.5s both;
+  }
+  .hero-actions {
+    display: flex; gap: 16px; align-items: center;
+    animation: fadeUp 0.7s ease 0.65s both;
+  }
+  .btn-primary {
+    background: var(--teal); color: var(--navy); font-weight: 700;
+    padding: 15px 36px; border-radius: 6px; text-decoration: none;
+    font-size: 1rem; display: inline-flex; align-items: center; gap: 8px;
+    transition: all 0.25s; box-shadow: 0 4px 24px rgba(26,191,168,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(26,191,168,0.4); background: var(--teal-light); }
+  .btn-ghost {
+    color: var(--white); font-weight: 500; padding: 15px 28px;
+    border-radius: 6px; text-decoration: none; font-size: 1rem;
+    border: 1px solid rgba(255,255,255,0.15); transition: all 0.25s;
+  }
+  .btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
+
+  .hero-stats {
+    position: absolute; right: 6%; bottom: 10%; z-index: 2;
+    display: flex; flex-direction: column; gap: 16px;
+    animation: fadeLeft 0.8s ease 0.8s both;
+  }
+  @keyframes fadeLeft { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+  .stat-card {
+    background: rgba(22,52,89,0.8); border: 1px solid var(--border);
+    border-radius: 12px; padding: 18px 24px;
+    backdrop-filter: blur(10px);
+  }
+  .stat-number { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--teal); }
+  .stat-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ─── SECTION BASE ─── */
+  section { padding: 100px 6%; }
+  .section-tag {
+    display: inline-block; color: var(--teal); font-size: 0.8rem;
+    font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700; line-height: 1.2; margin-bottom: 16px;
+  }
+  .section-sub { color: var(--text-muted); font-size: 1rem; line-height: 1.7; max-width: 560px; }
+
+  /* ─── WHY NOVATRY ─── */
+  .why { background: var(--off-white); color: var(--navy); }
+  .why .section-title { color: var(--navy); }
+  .why .section-sub { color: #5a7a99; }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 60px; }
+  .why-list { display: flex; flex-direction: column; gap: 20px; }
+  .why-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 20px; background: white; border-radius: 10px;
+    box-shadow: 0 2px 16px rgba(13,34,64,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .why-item:hover { transform: translateX(6px); box-shadow: 0 4px 24px rgba(13,34,64,0.1); }
+  .why-icon {
+    width: 40px; height: 40px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .why-icon svg { width: 20px; height: 20px; stroke: var(--teal); fill: none; stroke-width: 2; }
+  .why-item-title { font-weight: 600; color: var(--navy); font-size: 0.95rem; margin-bottom: 4px; }
+  .why-item-desc { color: #5a7a99; font-size: 0.85rem; line-height: 1.6; }
+  .why-visual {
+    background: linear-gradient(145deg, var(--navy), var(--navy-mid));
+    border-radius: 20px; padding: 40px; position: relative; overflow: hidden;
+  }
+  .why-visual::before {
+    content: ''; position: absolute; top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(26,191,168,0.2) 0%, transparent 70%);
+  }
+  .dashboard-mock {
+    background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px;
+  }
+  .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .dash-title { color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+  .dash-badge { background: rgba(26,191,168,0.15); color: var(--teal); font-size: 0.7rem; padding: 3px 10px; border-radius: 100px; }
+  .dash-metric { margin-bottom: 24px; }
+  .dash-metric-label { color: var(--text-muted); font-size: 0.75rem; margin-bottom: 4px; }
+  .dash-metric-value { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--white); font-weight: 700; }
+  .dash-metric-change { color: var(--teal); font-size: 0.78rem; margin-top: 4px; }
+  .dash-bars { display: flex; align-items: flex-end; gap: 8px; height: 80px; margin-top: 12px; }
+  .dash-bar { flex: 1; background: rgba(26,191,168,0.2); border-radius: 4px 4px 0 0; position: relative; overflow: hidden; }
+  .dash-bar::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, var(--teal), var(--teal-light)); opacity: 0.7; transform-origin: bottom; animation: barGrow 1.2s ease forwards; }
+  @keyframes barGrow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  .dash-bar:nth-child(1) { height: 40%; } .dash-bar:nth-child(2) { height: 60%; } .dash-bar:nth-child(3) { height: 50%; } .dash-bar:nth-child(4) { height: 80%; } .dash-bar:nth-child(5) { height: 65%; } .dash-bar:nth-child(6) { height: 90%; }
+
+  /* ─── SERVICES ─── */
+  .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  }
+  .service-card {
+    background: rgba(22,52,89,0.5); border: 1px solid var(--border);
+    border-radius: 14px; padding: 28px 24px;
+    transition: all 0.3s; cursor: default;
+    position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px; background: linear-gradient(90deg, var(--teal), transparent);
+    transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+  .service-card:hover { background: rgba(26,191,168,0.08); border-color: var(--teal); transform: translateY(-4px); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    width: 48px; height: 48px; border-radius: 10px;
+    background: rgba(26,191,168,0.1); display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+  }
+  .service-icon svg { width: 24px; height: 24px; stroke: var(--teal); fill: none; stroke-width: 1.8; }
+  .service-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 8px; }
+  .service-desc { color: var(--text-muted); font-size: 0.82rem; line-height: 1.6; }
+
+  /* ─── PROCESS ─── */
+  .process { background: var(--navy-mid); }
+  .process-steps { display: flex; gap: 0; margin-top: 60px; position: relative; }
+  .process-steps::before {
+    content: ''; position: absolute; top: 32px; left: 10%; right: 10%;
+    height: 1px; background: linear-gradient(90deg, transparent, var(--teal), transparent);
+  }
+  .process-step { flex: 1; text-align: center; padding: 0 20px; }
+  .step-circle {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--navy); border: 2px solid var(--teal);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px; font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700; color: var(--teal);
+    position: relative; z-index: 1;
+  }
+  .step-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 8px; }
+  .step-desc { color: var(--text-muted); font-size: 0.82rem; line-height: 1.6; }
+
+  /* ─── BENEFITS ─── */
+  .benefits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 60px; }
+  .benefit-card {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: rgba(22,52,89,0.5); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px;
+  }
+  .check-icon {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(26,191,168,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .check-icon svg { width: 14px; height: 14px; stroke: var(--teal); fill: none; stroke-width: 2.5; }
+  .benefit-text { font-size: 0.9rem; color: var(--off-white); line-height: 1.5; }
+
+  /* ─── CTA ─── */
+  .cta-section {
+    background: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 50%, var(--teal-light) 100%);
+    padding: 100px 6%; text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: ''; position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .cta-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 900; color: var(--navy); margin-bottom: 16px; position: relative; }
+  .cta-section p { color: rgba(13,34,64,0.75); font-size: 1.1rem; max-width: 500px; margin: 0 auto 40px; position: relative; }
+  .cta-form {
+    display: flex; gap: 12px; max-width: 560px; margin: 0 auto; position: relative;
+  }
+  .cta-form input {
+    flex: 1; padding: 15px 20px; border-radius: 8px; border: none;
+    background: rgba(13,34,64,0.12); color: var(--navy); font-size: 0.95rem;
+    font-family: 'DM Sans', sans-serif; outline: none;
+    box-shadow: inset 0 0 0 1px rgba(13,34,64,0.2);
+    transition: box-shadow 0.2s;
+  }
+  .cta-form input::placeholder { color: rgba(13,34,64,0.5); }
+  .cta-form input:focus { box-shadow: inset 0 0 0 2px var(--navy); }
+  .cta-form button {
+    background: var(--navy); color: var(--teal); font-weight: 700;
+    padding: 15px 28px; border-radius: 8px; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .cta-form button:hover { background: var(--navy-mid); transform: translateY(-1px); }
+
+  /* ─── CONTACT ─── */
+  .contact { background: var(--navy); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; margin-top: 60px; }
+  .contact-info h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 20px; }
+  .contact-detail { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; color: var(--text-muted); font-size: 0.9rem; }
+  .contact-detail svg { width: 18px; height: 18px; stroke: var(--teal); fill: none; stroke-width: 2; }
+  .contact-form { display: grid; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; letter-spacing: 0.5px; }
+  .form-group input, .form-group textarea {
+    background: rgba(22,52,89,0.5); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 16px; color: var(--white);
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--teal); }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-muted); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-submit {
+    background: var(--teal); color: var(--navy); font-weight: 700;
+    padding: 14px 36px; border-radius: 8px; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 1rem; justify-self: start;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(26,191,168,0.25);
+  }
+  .form-submit:hover { background: var(--teal-light); transform: translateY(-1px); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #080f1c; padding: 40px 6%;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid var(--border);
+  }
+  .footer-logo { color: var(--white); font-weight: 600; font-size: 1.1rem; }
+  .footer-logo span { color: var(--teal); }
+  .footer-tagline { color: var(--text-muted); font-size: 0.85rem; }
+  .footer-tagline em { color: var(--teal); font-style: normal; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--teal); }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- M shape with bars and arrow -->
+      <rect x="4" y="28" width="5" height="10" rx="1" fill="#163459"/>
+      <rect x="11" y="22" width="5" height="16" rx="1" fill="#163459"/>
+      <rect x="18" y="18" width="5" height="20" rx="1" fill="#163459"/>
+      <path d="M4 32 L22 12 L40 4" stroke="url(#g1)" stroke-width="3" stroke-linecap="round"/>
+      <path d="M36 4 L40 4 L40 8" stroke="#1abfa8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- people icons -->
+      <circle cx="28" cy="34" r="3" fill="#1abfa8"/>
+      <circle cx="36" cy="34" r="3" fill="#1abfa8"/>
+      <circle cx="32" cy="34" r="3" fill="#1abfa8"/>
+      <path d="M24 42 Q28 38 32 38 Q36 38 40 42" stroke="#1abfa8" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <defs><linearGradient id="g1" x1="4" y1="32" x2="40" y2="4" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#163459"/><stop offset="100%" stop-color="#1abfa8"/></linearGradient></defs>
+    </svg>
+    <span class="nav-logo-text">nova<span>try</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get Started</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Nairobi's Trusted Finance Partner</div>
+    <h1 class="hero-title">Your Complete<br/><em>Outsourced</em><br/>Finance Department</h1>
+    <p class="hero-sub">Grow your business while we manage your finances, compliance, reporting, and automation. Expert-level financial management — without the overhead.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Start Today
+      </a>
+      <a href="#services" class="btn-ghost">Explore Services</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-card">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">KRA Compliance Rate</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">30%</div>
+      <div class="stat-label">Avg. Cost Reduction</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">24/7</div>
+      <div class="stat-label">Real-time Monitoring</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY NOVATRY -->
+<section class="why" id="why">
+  <div class="reveal">
+    <span class="section-tag">Why Novatry</span>
+    <h2 class="section-title">Stop hiring expensive<br/>finance teams</h2>
+    <p class="section-sub">Novatry provides end-to-end finance management solutions ensuring profitability, compliance, efficiency, and sustainable growth.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-list reveal">
+      <div class="why-item">
+        <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <div><div class="why-item-title">No Full Finance Dept Needed</div><div class="why-item-desc">Get the expertise of an entire finance department at a fraction of the cost.</div></div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div><div class="why-item-title">Continuous Monitoring</div><div class="why-item-desc">We prevent losses with 24/7 financial performance monitoring and alerts.</div></div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+        <div><div class="why-item-title">Real-Time Financial Reporting</div><div class="why-item-desc">Always know where your business stands with live dashboards and insights.</div></div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+        <div><div class="why-item-title">Tax & Regulatory Compliance</div><div class="why-item-desc">Stay compliant with KRA and all regulatory requirements — zero penalties.</div></div>
+      </div>
+    </div>
+    <div class="why-visual reveal">
+      <div class="dashboard-mock">
+        <div class="dash-header">
+          <span class="dash-title">Financial Overview</span>
+          <span class="dash-badge">● Live</span>
+        </div>
+        <div class="dash-metric">
+          <div class="dash-metric-label">Total Revenue</div>
+          <div class="dash-metric-value">KES 45,750,000</div>
+          <div class="dash-metric-change">↑ 18.6% vs last month</div>
+        </div>
+        <div class="dash-metric">
+          <div class="dash-metric-label">Net Profit</div>
+          <div class="dash-metric-value">KES 12,650,000</div>
+          <div class="dash-metric-change">↑ 22.4% vs last month</div>
+        </div>
+        <div class="dash-bars">
+          <div class="dash-bar"></div><div class="dash-bar"></div><div class="dash-bar"></div>
+          <div class="dash-bar"></div><div class="dash-bar"></div><div class="dash-bar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header reveal">
+    <div>
+      <span class="section-tag">Our Services</span>
+      <h2 class="section-title">Everything your<br/>business needs</h2>
+    </div>
+    <p class="section-sub" style="max-width:320px">Comprehensive financial services designed to grow with your business.</p>
+  </div>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+      <div class="service-name">Accounting & Bookkeeping</div>
+      <div class="service-desc">Accurate records, reconciliations, and ledger management for full financial clarity.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+      <div class="service-name">Financial Statements</div>
+      <div class="service-desc">Professionally prepared income statements, balance sheets, and cash flow reports.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+      <div class="service-name">Auditing Services</div>
+      <div class="service-desc">Independent audits to verify accuracy and strengthen stakeholder confidence.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M9 14l6-6M9.5 8.5a.5.5 0 11-1 0 .5.5 0 011 0M14.5 13.5a.5.5 0 11-1 0 .5.5 0 011 0"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg></div>
+      <div class="service-name">KRA Tax Returns & Compliance</div>
+      <div class="service-desc">Timely, accurate tax filing and full KRA compliance management.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
+      <div class="service-name">Inventory Management</div>
+      <div class="service-desc">Track stock levels, costs, and value with integrated inventory systems.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+      <div class="service-name">Cash Flow Monitoring</div>
+      <div class="service-desc">Stay ahead of cash gaps with real-time monitoring and forecasting tools.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <div class="service-name">Profit & Loss Analysis</div>
+      <div class="service-desc">Deep-dive P&L analysis to identify what's driving or draining profitability.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg></div>
+      <div class="service-name">Finance Dept Automation</div>
+      <div class="service-desc">Automate workflows, approvals, and reporting to eliminate manual errors.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div>
+      <div class="service-name">Website Development</div>
+      <div class="service-desc">Professional websites that showcase your brand and generate leads online.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+      <div class="service-name">Pricing Strategy & Advisory</div>
+      <div class="service-desc">Optimize pricing to maximize margins and competitive positioning.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
+      <div class="service-name">Finance Software Implementation</div>
+      <div class="service-desc">Set up and integrate accounting software tailored to your business needs.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <div class="service-name">Team Training & Support</div>
+      <div class="service-desc">Upskill your team with hands-on training and ongoing financial support.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div style="text-align:center" class="reveal">
+    <span class="section-tag">How It Works</span>
+    <h2 class="section-title">Automate. Monitor. Grow.</h2>
+    <p class="section-sub" style="margin: 0 auto">Our proven four-step process to transform your business finances.</p>
+  </div>
+  <div class="process-steps reveal">
+    <div class="process-step">
+      <div class="step-circle">1</div>
+      <div class="step-title">Automate Processes</div>
+      <div class="step-desc">We set up automated systems to handle routine financial tasks seamlessly.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">2</div>
+      <div class="step-title">Monitor Performance</div>
+      <div class="step-desc">Real-time dashboards track KPIs, cash flow, and compliance status 24/7.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">3</div>
+      <div class="step-title">Generate Insights</div>
+      <div class="step-desc">Turn raw data into actionable intelligence for smarter decisions.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">4</div>
+      <div class="step-title">Drive Profitability</div>
+      <div class="step-desc">Use insights to grow revenue, cut costs, and scale sustainably.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section>
+  <div style="text-align:center" class="reveal">
+    <span class="section-tag">Why Businesses Choose Novatry</span>
+    <h2 class="section-title">Built for growth,<br/>designed for results</h2>
+  </div>
+  <div class="benefits-grid reveal">
+    <div class="benefit-card"><div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span class="benefit-text">No need to hire a full finance department — we handle everything</span></div>
+    <div class="benefit-card"><div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span class="benefit-text">Significantly reduce operational and overhead costs</span></div>
+    <div class="benefit-card"><div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span class="benefit-text">Prevent losses through continuous real-time financial monitoring</span></div>
+    <div class="benefit-card"><div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span class="benefit-text">Improve profitability and smarter pricing decisions</span></div>
+    <div class="benefit-card"><div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span class="benefit-text">Ensure full tax and regulatory compliance — zero penalties</span></div>
+    <div class="benefit-card"><div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span class="benefit-text">Real-time financial reporting whenever you need it</span></div>
+    <div class="benefit-card"><div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span class="benefit-text">Expert financial guidance from experienced professionals</span></div>
+    <div class="benefit-card"><div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span class="benefit-text">Scalable solutions that grow alongside your business</span></div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-section">
+  <h2>Focus on Growth.<br/>We'll Handle the Numbers.</h2>
+  <p>Join businesses across Kenya who trust Novatry for their complete financial management.</p>
+  <div class="cta-form">
+    <input type="email" placeholder="Enter your business email"/>
+    <button>Get a Free Consultation</button>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="reveal">
+    <span class="section-tag">Get In Touch</span>
+    <h2 class="section-title">Ready to transform<br/>your finances?</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="reveal">
+      <h3>Let's talk about your business</h3>
+      <p style="color: var(--text-muted); font-size:0.9rem; line-height:1.7; margin-bottom:32px;">Tell us about your business and we'll show you exactly how Novatry can save you money, ensure compliance, and drive growth.</p>
+      <div class="contact-detail">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Nairobi, Kenya
+      </div>
+      <div class="contact-detail">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:novatryinvestmentlimited@gmail.com" style="color: inherit; text-decoration:none;">sales@novatry.africa</a>
+      </div>
+      <div class="contact-detail">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+        <a href="https://www.novatry.africa" target="_blank" style="color: var(--teal); text-decoration:none;">www.novatry.africa</a>
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <div class="form-row">
+        <div class="form-group"><label>NAME</label><input type="text" placeholder="Your full name"/></div>
+        <div class="form-group"><label>EMAIL</label><input type="email" placeholder="your@email.com"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>PHONE</label><input type="tel" placeholder="+254 700 000 000"/></div>
+        <div class="form-group"><label>COMPANY</label><input type="text" placeholder="Your company name"/></div>
+      </div>
+      <div class="form-group"><label>MESSAGE</label><textarea placeholder="Tell us about your business needs..."></textarea></div>
+      <button class="form-submit">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">nova<span>try</span></div>
+  <div class="footer-tagline">Grow Businesses. <em>Drive Impact.</em></div>
+  <div class="footer-links">
+    <a href="#why">Why Us</a>
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#contact">Contact</a>
+    <a href="https://www.novatry.africa">Website</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Stagger service cards
+  document.querySelectorAll('.service-card').forEach((card, i) => {
+    card.style.animationDelay = `${i * 0.07}s`;
+  });
+</script>
+</body>
+</html>
